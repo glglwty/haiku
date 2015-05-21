@@ -13,7 +13,7 @@
 
 #include <arch_kernel.h>
 #include <arch_config.h>
-
+#include <thread_types.h>
 
 #ifndef KERNEL_LOAD_BASE
 #	define KERNEL_LOAD_BASE		KERNEL_BASE
@@ -29,6 +29,8 @@
 #	define IS_KERNEL_ADDRESS(x) \
 		((addr_t)(x) >= KERNEL_BASE && (addr_t)(x) <= KERNEL_TOP)
 #endif
+
+
 
 // Buffers passed in from user-space shouldn't point into the kernel.
 #if USER_BASE == 0

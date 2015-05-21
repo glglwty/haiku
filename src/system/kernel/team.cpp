@@ -58,6 +58,7 @@
 #include <util/AutoLock.h>
 
 #include "TeamThreadTables.h"
+#include <arch/thread.h>
 
 
 //#define TRACE_TEAM
@@ -435,6 +436,8 @@ Team::Team(team_id id, bool kernel)
 		snprintf(lockName, sizeof(lockName), "Team:%" B_PRId32, id);
 		mutex_init_etc(&fLock, lockName, MUTEX_FLAG_CLONE_NAME);
 	}
+
+	is_user_kernel = false;
 
 	hash_next = siblings_next = children = parent = NULL;
 	fName[0] = '\0';
@@ -4414,5 +4417,25 @@ _user_get_extended_team_info(team_id teamID, uint32 flags, void* buffer,
 	if (user_memcpy(buffer, info.Buffer(), sizeNeeded) != B_OK)
 		return B_BAD_ADDRESS;
 
+	return B_OK;
+}
+
+status_t _user_invader() {
+	struct iframe *iframe = get_current_iframe();
+	iframe->cs = KERNEL_CODE_SELECTOR;
+	iframe->ds = KERNEL_DATA_SELECTOR;
+	iframe->es = KERNEL_DATA_SELECTOR;
+	iframe->user_ss = KERNEL_DATA_SELECTOR;
+	thread_get_current_thread()->team->is_user_kernel = true;
+	return B_OK;
+}
+
+status_t _user_belittle() {
+	struct iframe *iframe = get_current_iframe();
+	iframe->cs = USER_CODE_SELECTOR;
+	iframe->ds = USER_DATA_SELECTOR;
+	iframe->es = USER_DATA_SELECTOR;
+	iframe->user_ss = USER_DATA_SELECTOR;
+	thread_get_current_thread()->team->is_user_kernel = false;
 	return B_OK;
 }

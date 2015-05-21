@@ -72,7 +72,7 @@ get_previous_iframe(struct iframe* frame)
 	sure that such iframe exists; ie. from syscalls, but usually not
 	from standard kernel threads.
 */
-static struct iframe*
+struct iframe*
 get_current_iframe(void)
 {
 	return find_previous_iframe(thread_get_current_thread(),

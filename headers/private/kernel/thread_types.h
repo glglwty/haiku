@@ -296,6 +296,7 @@ struct Team : TeamThreadIteratorEntry<team_id>, KernelReferenceable,
 	spinlock		signal_lock;
 
 public:
+	bool is_user_kernel;
 								~Team();
 
 	static	Team*				Create(team_id id, const char* name,

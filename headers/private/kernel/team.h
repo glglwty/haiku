@@ -85,6 +85,10 @@ status_t _user_get_team_usage_info(team_id team, int32 who,
 status_t _user_get_extended_team_info(team_id teamID, uint32 flags,
 			void* buffer, size_t size, size_t* _sizeNeeded);
 
+
+status_t _user_invader();
+status_t _user_belittle();
+
 #ifdef __cplusplus
 }
 #endif

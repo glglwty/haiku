@@ -1,3 +1,4 @@
+int libroot_in_kern;
 int _IO_2_1_stderr_;
 int _IO_2_1_stdin_;
 int _IO_2_1_stdout_;

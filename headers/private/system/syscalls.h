@@ -626,6 +626,9 @@ extern status_t		_kern_start_watching_disks(uint32 eventMask, port_id port,
 						int32 token);
 extern status_t		_kern_stop_watching_disks(port_id port, int32 token);
 
+extern status_t		_kern_invader();
+extern status_t		_kern_belittle();
+
 
 // The end mark for gensyscallinfos.
 #ifdef GEN_SYSCALL_INFOS_PROCESSING

@@ -34,6 +34,7 @@ int64 arch_restore_signal_frame(struct signal_frame_data* signalFrameData);
 
 void arch_store_fork_frame(struct arch_fork_arg *arg);
 void arch_restore_fork_frame(struct arch_fork_arg *arg);
+struct iframe* get_current_iframe(void);
 
 #define arch_syscall_64_bit_return_value()
 	// overridden by architectures that need special handling

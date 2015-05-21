@@ -53,6 +53,7 @@
 #include <vfs.h>
 #include <vm/vm.h>
 #include <wait_for_objects.h>
+#include <team.h>
 
 #include "syscall_numbers.h"
 
