@@ -1,4 +1,6 @@
 int libroot_in_kern;
+int libroot_use_direct_funccall;
+void** libroot_syscall_space;
 int _IO_2_1_stderr_;
 int _IO_2_1_stdin_;
 int _IO_2_1_stdout_;

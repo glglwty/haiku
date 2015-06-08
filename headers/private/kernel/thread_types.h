@@ -447,6 +447,8 @@ struct Thread : TeamThreadIteratorEntry<thread_id>, KernelReferenceable {
 
 	bool			in_kernel;		// protected by time_lock, only written by
 									// this thread
+
+	int			is_invader;
 	bool			has_yielded;	// protected by scheduler lock
 	Scheduler::ThreadData*	scheduler_data; // protected by scheduler lock
 

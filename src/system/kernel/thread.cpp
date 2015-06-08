@@ -180,6 +180,7 @@ Thread::Thread(const char* name, thread_id threadID, struct cpu_ent* cpu)
 	signal_stack_size(0),
 	signal_stack_enabled(false),
 	in_kernel(true),
+	is_invader(false),
 	has_yielded(false),
 	user_thread(NULL),
 	fault_handler(0),

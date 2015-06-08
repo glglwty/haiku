@@ -628,6 +628,7 @@ extern status_t		_kern_stop_watching_disks(port_id port, int32 token);
 
 extern status_t		_kern_invader();
 extern status_t		_kern_belittle();
+extern status_t 	_kern_get_syscall_addr(addr_t addr);
 
 
 // The end mark for gensyscallinfos.

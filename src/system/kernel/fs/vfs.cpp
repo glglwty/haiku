@@ -9377,6 +9377,7 @@ status_t
 _user_read_stat(int fd, const char* userPath, bool traverseLink,
 	struct stat* userStat, size_t statSize)
 {
+	//kprintf("in _user_read_stat, fd = %d, user path = %lx, traverseLink = %d, userStat = %lx, statSize = %lx \n", fd, (size_t)userPath, (int)traverseLink, (size_t)userStat, statSize);
 	struct stat stat;
 	status_t status;
 

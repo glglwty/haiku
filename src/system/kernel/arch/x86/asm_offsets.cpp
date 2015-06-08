@@ -44,6 +44,7 @@ dummy()
 	DEFINE_OFFSET_MACRO(THREAD, Thread, user_time);
 	DEFINE_OFFSET_MACRO(THREAD, Thread, last_time);
 	DEFINE_OFFSET_MACRO(THREAD, Thread, in_kernel);
+	DEFINE_OFFSET_MACRO(THREAD, Thread,	is_invader);
 	DEFINE_OFFSET_MACRO(THREAD, Thread, flags);
 	DEFINE_OFFSET_MACRO(THREAD, Thread, kernel_stack_top);
 	DEFINE_OFFSET_MACRO(THREAD, Thread, fault_handler);

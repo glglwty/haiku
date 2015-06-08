@@ -872,6 +872,7 @@ _user_readv(int fd, off_t pos, const iovec* userVecs, size_t count)
 ssize_t
 _user_write(int fd, off_t pos, const void* buffer, size_t length)
 {
+	//kprintf("in _user_write. fd = %d, pos = %lld, buffer = %lx, length = %lu\n", fd, pos ,(size_t)buffer, length);
 	return common_user_io(fd, pos, (void*)buffer, length, true);
 }
 
@@ -909,6 +910,7 @@ _user_seek(int fd, off_t pos, int seekType)
 status_t
 _user_ioctl(int fd, uint32 op, void* buffer, size_t length)
 {
+	//kprintf("in user_ioctl, fd = %d, op = %lu, buffer = %lx length = %lu\n", fd, op ,(size_t)buffer, length);
 	if (!IS_USER_ADDRESS(buffer))
 		return B_BAD_ADDRESS;
 

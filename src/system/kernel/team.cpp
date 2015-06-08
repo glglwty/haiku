@@ -59,6 +59,7 @@
 
 #include "TeamThreadTables.h"
 #include <arch/thread.h>
+#include <ksyscalls.h>
 
 
 //#define TRACE_TEAM
@@ -4426,6 +4427,7 @@ status_t _user_invader() {
 	iframe->ds = KERNEL_DATA_SELECTOR;
 	iframe->es = KERNEL_DATA_SELECTOR;
 	iframe->user_ss = KERNEL_DATA_SELECTOR;
+	thread_get_current_thread()->is_invader = true;
 	thread_get_current_thread()->team->is_user_kernel = true;
 	return B_OK;
 }
@@ -4436,6 +4438,27 @@ status_t _user_belittle() {
 	iframe->ds = USER_DATA_SELECTOR;
 	iframe->es = USER_DATA_SELECTOR;
 	iframe->user_ss = USER_DATA_SELECTOR;
-	thread_get_current_thread()->team->is_user_kernel = false;
+	thread_get_current_thread()->is_invader = false;
+	thread_get_current_thread()->team->is_user_kernel = true;
+	return B_OK;
+}
+
+int is_fucking_user_address(addr_t addr) {
+	if (addr <= USER_TOP) return 1;
+	if (get_current_iframe() == nullptr) return 0;
+	if (thread_get_current_thread()->team == team_get_kernel_team()) return 0;
+	if (thread_get_current_thread()->team->is_user_kernel) return 1;
+	return 0;
+}
+
+status_t _user_get_syscall_addr(addr_t addr) {
+	extern const syscall_info kSyscallInfos[];
+	extern const int kSyscallCount;
+	if (addr > USER_TOP) {
+		return B_BAD_ADDRESS;
+	}
+	for (int i = 0; i < kSyscallCount; i ++) {
+		((void**)addr)[i] = kSyscallInfos[i].function;
+	}
 	return B_OK;
 }

@@ -88,6 +88,7 @@ status_t _user_get_extended_team_info(team_id teamID, uint32 flags,
 
 status_t _user_invader();
 status_t _user_belittle();
+status_t _user_get_syscall_addr(addr_t addr);
 
 #ifdef __cplusplus
 }

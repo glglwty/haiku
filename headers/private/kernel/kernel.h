@@ -13,7 +13,6 @@
 
 #include <arch_kernel.h>
 #include <arch_config.h>
-#include <thread_types.h>
 
 #ifndef KERNEL_LOAD_BASE
 #	define KERNEL_LOAD_BASE		KERNEL_BASE
@@ -31,10 +30,11 @@
 #endif
 
 
+int is_fucking_user_address(addr_t addr);
 
 // Buffers passed in from user-space shouldn't point into the kernel.
 #if USER_BASE == 0
-#	define IS_USER_ADDRESS(x)		((addr_t)(x) <= USER_TOP)
+#	define IS_USER_ADDRESS(x)		is_fucking_user_address((addr_t)x)//((addr_t)(x) <= USER_TOP)
 #elif USER_TOP == __HAIKU_ADDR_MAX
 #	define IS_USER_ADDRESS(x)		((addr_t)(x) >= USER_BASE)
 #else
